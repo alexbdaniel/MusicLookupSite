@@ -1,8 +1,9 @@
 import "./SearchForm.css";
 import "./DataGetter";
-import { getDataAsync } from "./DataGetter";
+// import { getDataAsync } from "./DataGetter";
 import { useState } from "react";
 import { iNotification, NOTIFICATION_TYPE, Store } from "react-notifications-component";
+import { getDataAsyncTest } from "./components/DataGetterTest";
 
 
 
@@ -77,7 +78,9 @@ export const SearchForm = ({setResults, setResultsLoading, setNoResultsFound}: I
     setResultsLoading(true);
 
     try {
-      const results: IResult[] = await getDataAsync(url);
+      
+      const results = await getDataAsyncTest();
+      //const results: IResult[] = await getDataAsync(url);
       setResults(results);
       setResultsLoading(false);
       setNoResultsFound(results != null && results.length === 0);
@@ -85,6 +88,10 @@ export const SearchForm = ({setResults, setResultsLoading, setNoResultsFound}: I
     } catch (error) {
       notifyError();
       console.log(error);
+    }
+    finally
+    {
+      setResultsLoading(false);
     }
   }
 
