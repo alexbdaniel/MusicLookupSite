@@ -1,9 +1,9 @@
 import "./SearchForm.css";
 import "./DataGetter";
-// import { getDataAsync } from "./DataGetter";
+import { getDataAsync } from "./DataGetter";
 import { useState } from "react";
 import { iNotification, NOTIFICATION_TYPE, Store } from "react-notifications-component";
-import { getDataAsyncTest } from "./components/DataGetterTest";
+
 
 
 
@@ -63,8 +63,7 @@ export const SearchForm = ({setResults, setResultsLoading, setNoResultsFound}: I
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    setResults([]);
+
     const form = new FormData(e.currentTarget);
 
     const url = form.get("url")?.toString().trim();
@@ -79,20 +78,8 @@ export const SearchForm = ({setResults, setResultsLoading, setNoResultsFound}: I
 
     try {
       
-      const results = await getDataAsyncTest();
-
-      console.log(results);
-
-
-
-
-
-
-
-
-
-      //const results: IResult[] = await getDataAsync(url);
-      //setResults(results);
+      const results: IResult[] = await getDataAsync(url);
+      setResults(results);
       setResultsLoading(false);
       setNoResultsFound(results != null && results.length === 0);
 
