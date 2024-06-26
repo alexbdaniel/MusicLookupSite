@@ -64,7 +64,7 @@ export const SearchForm = ({setResults, setResultsLoading, setNoResultsFound}: I
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-
+    setResults([]);
     const form = new FormData(e.currentTarget);
 
     const url = form.get("url")?.toString().trim();
@@ -80,8 +80,19 @@ export const SearchForm = ({setResults, setResultsLoading, setNoResultsFound}: I
     try {
       
       const results = await getDataAsyncTest();
+
+      console.log(results);
+
+
+
+
+
+
+
+
+
       //const results: IResult[] = await getDataAsync(url);
-      setResults(results);
+      //setResults(results);
       setResultsLoading(false);
       setNoResultsFound(results != null && results.length === 0);
 
